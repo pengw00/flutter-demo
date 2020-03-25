@@ -14,13 +14,18 @@ class _LoginPageState extends State<LoginPage> {
         child: ListView(
             padding: EdgeInsets.symmetric(horizontal: 24.0),
             children: <Widget>[
-              SizedBox(height: 80.0),
-              Column(children: <Widget>[
-                IconButton(icon: Icon(Icons.list), onPressed: () {}),
-                SizedBox(height: 120.0),
-                Text("Material Icon")
-              ]),
+              // SizedBox(height: 80.0),
+              // Column(children: <Widget>[
+              // IconButton(icon: Icon(Icons.list), onPressed: () {}),
+              // SizedBox(height: 120.0),
+              // Text("Login")
+              // ]),
               SizedBox(height: 120.0),
+              TextField(
+                decoration:
+                    InputDecoration(labelText: 'Username', filled: true),
+                obscureText: true,
+              ),
               TextField(
                 decoration:
                     InputDecoration(labelText: 'Password', filled: true),
