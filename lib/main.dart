@@ -3,6 +3,7 @@ import 'package:english_words/english_words.dart';
 
 void main() => runApp(MyApp());
 
+//root wedget
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
@@ -21,11 +22,11 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.red,
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Welcome to Flutter'),
+          title: Text('Flutter Hub'),
         ),
         body: Center(
             // child: MyHomePage(title: "gogogogog"),
@@ -135,9 +136,10 @@ class RandomWordsState extends State<RandomWords> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading:
+            IconButton(icon: Icon(Icons.account_box), onPressed: _pushSaved),
         title: Text('Startup Name Generator'),
         actions: <Widget>[
-          // Add 3 lines from here...
           IconButton(icon: Icon(Icons.list), onPressed: _pushSaved),
         ],
       ),
