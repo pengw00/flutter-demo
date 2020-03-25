@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
 
+import 'login.dart';
+
 void main() => runApp(MyApp());
 
 //root wedget
@@ -132,12 +134,27 @@ class RandomWordsState extends State<RandomWords> {
     );
   }
 
+  void _loginRoute() {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (BuildContext context) {
+          return Scaffold(
+            appBar: AppBar(
+              title: Text('Login'),
+            ),
+            body: LoginPage(),
+          );
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading:
-            IconButton(icon: Icon(Icons.account_box), onPressed: _pushSaved),
+            IconButton(icon: Icon(Icons.account_box), onPressed: _loginRoute),
         title: Text('Startup Name Generator'),
         actions: <Widget>[
           IconButton(icon: Icon(Icons.list), onPressed: _pushSaved),
