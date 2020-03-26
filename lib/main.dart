@@ -3,6 +3,7 @@ import 'package:english_words/english_words.dart';
 
 import 'login.dart';
 import 'posts.dart';
+import 'routes.dart';
 
 void main() => runApp(MyApp());
 
@@ -27,12 +28,13 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.red,
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Flutter Hub'),
-        ),
-        body: Center(child: RandomWords()),
-      ),
+      routes: routes,
+      // home: Scaffold(
+      //   appBar: AppBar(
+      //     title: Text('Flutter Hub'),
+      //   ),
+      //   body: Center(child: RandomWords()),
+      // ),
     );
   }
 }
