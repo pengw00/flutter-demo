@@ -6,6 +6,8 @@ import 'user.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
 
+final String columnId = 'username';
+
 class DatabaseHelper {
   static final DatabaseHelper _instance = new DatabaseHelper.internal();
   factory DatabaseHelper() => _instance;
@@ -42,8 +44,16 @@ class DatabaseHelper {
 
   Future<int> deleteUsers() async {
     var dbClient = await db;
-    int res = await dbClient.delete("User");
+    var res = await dbClient.delete("User");
+    print(res);
     return res;
+  }
+
+  Future<Map<String, dynamic>> findUserByName(String username) async {
+    var dbClient = await db;
+    List<Map<String, dynamic>> res = await dbClient
+        .query("User", where: '$columnId = ?', whereArgs: [username]);
+    return res[0];
   }
 
   Future<bool> isLoggedIn() async {

@@ -1,15 +1,13 @@
-import 'data/user.dart';
-
-abstract class LoginScreenContract {
-  void onLogoutSuccess(User user);
+abstract class LogoutScreenContract {
+  void onLogoutSuccess(String user);
   void onLoginError(String errorTxt);
 }
 
 class LogoutScreenPresenter {
-  LoginScreenContract _view;
+  LogoutScreenContract _view;
   LogoutScreenPresenter(this._view);
 
-  doLogout(User user) {
+  doLogout(String user) {
     _view.onLogoutSuccess(user);
   }
 }

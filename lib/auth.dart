@@ -18,6 +18,19 @@ class AuthStateProvider {
     initState();
   }
 
+  void cleanUpstate() async {
+    var db = new DatabaseHelper();
+    await db.deleteUsers();
+  }
+
+  void logDbData() async {
+    var db = new DatabaseHelper();
+    var res = await db.findUserByName("pengwu550@yahoo.com");
+    print("sdsd");
+    print(res.toString());
+    print("fdfdf");
+  }
+
   void initState() async {
     var db = new DatabaseHelper();
     var isLoggedIn = await db.isLoggedIn();
