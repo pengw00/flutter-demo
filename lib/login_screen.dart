@@ -145,4 +145,10 @@ class LoginScreenState extends State<LoginScreen>
     var authStateProvider = new AuthStateProvider();
     authStateProvider.notify(AuthState.LOGGED_IN);
   }
+
+  void onLogout(String user) async {
+    setState(() => _isLoading = false);
+    var db = new DatabaseHelper();
+    await db.deleteUsers();
+  }
 }

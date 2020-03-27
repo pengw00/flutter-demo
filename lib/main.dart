@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
 
-import 'login.dart';
+import 'account.dart';
 import 'posts.dart';
 import 'routes.dart';
 
@@ -138,7 +138,7 @@ class RandomWordsState extends State<RandomWords> {
             appBar: AppBar(
               title: Text('Login'),
             ),
-            body: LoginPage(),
+            body: AccountPage(),
           );
         },
       ),
