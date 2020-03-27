@@ -20,7 +20,7 @@ class LoginScreenState extends State<LoginScreen>
   bool _isLoading = false;
   final formKey = new GlobalKey<FormState>();
   final scaffoldKey = new GlobalKey<ScaffoldState>();
-  String _username, _password;
+  String _email, _password;
 
   LoginScreenPresenter _presenter;
 
@@ -36,7 +36,7 @@ class LoginScreenState extends State<LoginScreen>
     if (form.validate()) {
       setState(() => _isLoading = true);
       form.save();
-      _presenter.doLogin(_username, _password);
+      _presenter.doLogin(_email, _password);
     }
   }
 
@@ -47,6 +47,7 @@ class LoginScreenState extends State<LoginScreen>
 
   @override
   onAuthStateChanged(AuthState state) {
+    print(state);
     if (state == AuthState.LOGGED_IN)
       Navigator.of(_ctx).pushReplacementNamed("/home");
   }
@@ -72,19 +73,25 @@ class LoginScreenState extends State<LoginScreen>
               new Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: new TextFormField(
-                  onSaved: (val) => _username = val,
+                  // onChanged: (val) => print(val),
+                  onSaved: (val) => _email = val,
                   validator: (val) {
-                    return val.length < 10
-                        ? "Username must have atleast 10 chars"
+                    return val.length < 5
+                        ? "Email must have atleast 5 chars"
                         : null;
                   },
-                  decoration: new InputDecoration(labelText: "Username"),
+                  decoration: new InputDecoration(labelText: "Email"),
                 ),
               ),
               new Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: new TextFormField(
                   onSaved: (val) => _password = val,
+                  validator: (val) {
+                    return val.length < 5
+                        ? "Password must have atleast 5 chars"
+                        : null;
+                  },
                   decoration: new InputDecoration(labelText: "Password"),
                 ),
               ),
@@ -100,11 +107,11 @@ class LoginScreenState extends State<LoginScreen>
       appBar: null,
       key: scaffoldKey,
       body: new Container(
-        decoration: new BoxDecoration(
-          image: new DecorationImage(
-              image: new AssetImage("assets/login_background.jpg"),
-              fit: BoxFit.cover),
-        ),
+        // decoration: new BoxDecoration(
+        // image: new DecorationImage(
+        // image: new AssetImage("assets/login_background.jpg"),
+        // fit: BoxFit.cover),
+        // ),
         child: new Center(
           child: new ClipRect(
             child: new BackdropFilter(

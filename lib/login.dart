@@ -22,6 +22,7 @@ class _LoginPageState extends State<LoginPage> {
               // ]),
               SizedBox(height: 120.0),
               TextField(
+                onChanged: (val) => print(val),
                 decoration:
                     InputDecoration(labelText: 'Username', filled: true),
                 obscureText: true,
