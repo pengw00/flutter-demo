@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'logout_sceen_presenter.dart';
 import 'data/database_helper.dart';
 import 'auth.dart';
+import 'data/user.dart';
 
 class AccountPage extends StatefulWidget {
   @override
@@ -23,64 +24,41 @@ class LogoutScreenState extends State<AccountPage>
   }
 
   void _logout() {
-    _presenter.doLogout("pengwu550@yahoo.com");
+    _presenter.doLogout(User.map({"username": "dsd", "password": "resdsd"}));
+    Navigator.pop(_context);
   }
 
   @override
   onAuthStateChanged(AuthState state) {
-    print(state);
     if (state == AuthState.LOGGED_IN)
       Navigator.of(_context).pushReplacementNamed("/home");
     else
-      Navigator.of(_context).pushReplacementNamed("");
+      Navigator.of(_context).pushReplacementNamed("/login");
   }
 
   @override
   Widget build(BuildContext context) {
     _context = context;
     return Scaffold(
-      body: SafeArea(
-        child: ListView(
-            padding: EdgeInsets.symmetric(horizontal: 24.0),
-            children: <Widget>[
-              Text("Account Info"),
-              IconButton(icon: Icon(Icons.list), onPressed: _logout),
-              // ]),
-
-              // SizedBox(height: 120.0),
-              // TextField(
-              //   onChanged: (val) => print(val),
-              //   decoration:
-              //       InputDecoration(labelText: 'Username', filled: true),
-              //   obscureText: true,
-              // ),
-              // TextField(
-              //   decoration:
-              //       InputDecoration(labelText: 'Password', filled: true),
-              //   obscureText: true,
-              // ),
-              // ButtonBar(
-              //   children: <Widget>[
-              //     FlatButton(
-              //       child: Text('CANCEL'),
-              //       onPressed: () {},
-              //     ),
-              //     RaisedButton(child: Text('NEXT'), onPressed: () {})
-              //   ],
-              // ),
-            ]),
-      ),
-    );
+        key: scaffoldKey,
+        body: new Center(
+          child: ListView(
+              padding: EdgeInsets.symmetric(horizontal: 24.0),
+              children: <Widget>[
+                Text("Account Info"),
+                IconButton(icon: Icon(Icons.list), onPressed: _logout),
+              ]),
+        ));
   }
 
-  // void _showSnackBar(String text) {
-  //   scaffoldKey.currentState
-  //       .showSnackBar(new SnackBar(content: new Text(text)));
-  // }
+  void _showSnackBar(String text) {
+    scaffoldKey.currentState
+        .showSnackBar(new SnackBar(content: new Text(text)));
+  }
 
   @override
-  void onLogoutSuccess(String username) async {
-    // _showSnackBar(username);
+  void onLogoutSuccess(User user) async {
+    _showSnackBar(user.username);
     var db = new DatabaseHelper();
     await db.deleteUsers();
     var authStateProvider = new AuthStateProvider();
@@ -89,6 +67,6 @@ class LogoutScreenState extends State<AccountPage>
 
   @override
   void onLoginError(String errorTxt) {
-    // _showSnackBar(errorTxt);
+    _showSnackBar(errorTxt);
   }
 }

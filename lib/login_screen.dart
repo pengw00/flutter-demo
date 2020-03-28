@@ -47,11 +47,8 @@ class LoginScreenState extends State<LoginScreen>
 
   @override
   onAuthStateChanged(AuthState state) {
-    print(state);
     if (state == AuthState.LOGGED_IN)
       Navigator.of(_ctx).pushReplacementNamed("/home");
-    else
-      Navigator.of(_ctx).pushReplacementNamed("/login");
   }
 
   @override
@@ -75,7 +72,6 @@ class LoginScreenState extends State<LoginScreen>
               new Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: new TextFormField(
-                  // onChanged: (val) => print(val),
                   onSaved: (val) => _email = val,
                   validator: (val) {
                     return val.length < 5
@@ -90,8 +86,8 @@ class LoginScreenState extends State<LoginScreen>
                 child: new TextFormField(
                   onSaved: (val) => _password = val,
                   validator: (val) {
-                    return val.length < 5
-                        ? "Password must have atleast 5 chars"
+                    return val.length < 4
+                        ? "Password must have at least 5 chars"
                         : null;
                   },
                   decoration: new InputDecoration(labelText: "Password"),
