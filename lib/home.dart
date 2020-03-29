@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
 
+import 'auth.dart';
 import 'posts.dart';
-import 'account.dart';
+// import 'account.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -23,10 +24,16 @@ class RandomWords extends StatefulWidget {
   RandomWordsState createState() => RandomWordsState();
 }
 
-class RandomWordsState extends State<RandomWords> {
+class RandomWordsState extends State<RandomWords> implements AuthStateListener {
+  BuildContext _ctx;
   final _suggestions = <WordPair>[];
   final Set<WordPair> _saved = Set<WordPair>();
   final _biggerFont = const TextStyle(fontSize: 18.0);
+
+  RandomWordsState() {
+    var authStateProvider = new AuthStateProvider();
+    authStateProvider.subscribe(this);
+  }
 
   Widget _buildSuggestions() {
     return ListView.builder(
@@ -63,6 +70,12 @@ class RandomWordsState extends State<RandomWords> {
         });
       },
     );
+  }
+
+  @override
+  onAuthStateChanged(AuthState state) {
+    if (state == AuthState.LOGGED_OUT) print('fdfd');
+    // Navigator.of(_ctx).pushReplacementNamed('/login');
   }
 
   void _pushSaved() {
@@ -110,22 +123,12 @@ class RandomWordsState extends State<RandomWords> {
   }
 
   void _loginRoute() {
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(
-        builder: (BuildContext context) {
-          return Scaffold(
-            appBar: AppBar(
-              title: Text('Login'),
-            ),
-            body: AccountPage(),
-          );
-        },
-      ),
-    );
+    Navigator.of(_ctx).pushReplacementNamed('/account');
   }
 
   @override
   Widget build(BuildContext context) {
+    _ctx = context;
     return Scaffold(
       appBar: AppBar(
         title: Text('Startup Name Generator'),

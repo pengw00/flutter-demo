@@ -25,14 +25,11 @@ class LogoutScreenState extends State<AccountPage>
 
   void _logout() {
     _presenter.doLogout(User.map({"username": "dsd", "password": "resdsd"}));
-    Navigator.pop(_context);
   }
 
   @override
   onAuthStateChanged(AuthState state) {
-    if (state == AuthState.LOGGED_IN)
-      Navigator.of(_context).pushReplacementNamed("/home");
-    else
+    if (state == AuthState.LOGGED_OUT)
       Navigator.of(_context).pushReplacementNamed("/login");
   }
 

@@ -48,7 +48,7 @@ class LoginScreenState extends State<LoginScreen>
   @override
   onAuthStateChanged(AuthState state) {
     if (state == AuthState.LOGGED_IN)
-      Navigator.of(_ctx).pushReplacementNamed("/home");
+      Navigator.of(_ctx).pushReplacementNamed("/");
   }
 
   @override
@@ -139,7 +139,8 @@ class LoginScreenState extends State<LoginScreen>
     _showSnackBar(user.toString());
     setState(() => _isLoading = false);
     var db = new DatabaseHelper();
-    await db.saveUser(user);
+    var res = await db.saveUser(user);
+    print(res);
     var authStateProvider = new AuthStateProvider();
     authStateProvider.notify(AuthState.LOGGED_IN);
   }

@@ -46,6 +46,7 @@ class DatabaseHelper {
     var dbClient = await db;
     var res = await dbClient.delete("User");
     print(res);
+    print('object');
     return res;
   }
 
