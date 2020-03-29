@@ -9,7 +9,7 @@ class Post {
     return new Post._(
       title: json['title'],
       content: json['content'],
-      imagePath: json['url'],
+      imagePath: json['imagePath'],
     );
   }
 }

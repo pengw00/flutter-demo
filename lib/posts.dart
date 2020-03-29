@@ -22,6 +22,7 @@ class _PostsFetchData extends State<PostsFetchData> {
       list = (json.decode(response.body)['posts'] as List)
           .map((data) => new Post.fromJson(data))
           .toList();
+      print(list[9].imagePath);
       setState(() {
         isLoading = false;
       });
@@ -47,16 +48,18 @@ class _PostsFetchData extends State<PostsFetchData> {
             : ListView.builder(
                 itemCount: list.length,
                 itemBuilder: (BuildContext context, int index) {
+                  print(list[index].imagePath);
                   return ListTile(
                     contentPadding: EdgeInsets.all(10.0),
                     title: new Text(list[index].title),
                     trailing: new Image.network(
-                      list[index].imagePath == null
-                          ? "https://www.w3schools.com/w3css/w3css_images.asp"
-                          : list[index].imagePath,
+                      index % 2 == 0
+                          ? "https://i.picsum.photos/id/9/250/250.jpg"
+                          : 'https://angular-project-image160822-nodejs.s3.us-east-2.amazonaws.com/t_1584301583894.jpg',
+                      // : list[index].imagePath,
                       fit: BoxFit.cover,
-                      height: 40.0,
-                      width: 40.0,
+                      height: 80.0,
+                      width: 250.0,
                     ),
                   );
                 }));
